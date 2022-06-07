@@ -91,7 +91,7 @@ function SignUpPage() {
     e.preventDefault();
     const body = { firstName, lastName, password, email, phonenumber };
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/auth/signup`, body)
+      .post(`${process.env.REACT_APP_API_URL}/auth/signup`, body)
       .then(() => {
         navigate("/login");
       })

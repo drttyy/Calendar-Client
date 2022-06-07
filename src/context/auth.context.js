@@ -8,16 +8,34 @@ function AuthProviderWrapper(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  const storeToken = (token) => localStorage.setItem("authToken", token);
-  const removeToken = (token) => localStorage.removeItem("authToken");
+  console.log("__________", user);
+
+  const storeToken = (token) => {
+    localStorage.setItem("authToken", token);
+  };
+
+  const removeToken = () => {
+    localStorage.removeItem("authToken");
+  };
+
+  const logoutUser = () => {
+    removeToken();
+    authenticateUser();
+  };
+
+  const getToken = () => {
+    return localStorage.getItem("authToken");
+  };
 
   const authenticateUser = () => {
     const storedToken = localStorage.getItem("authToken");
 
     if (storedToken) {
       axios
-        .get(`${process.env.REACT_APP_BASE_URL}/verify`, {
-          headers: { Authorization: `Bearer ${storedToken}` },
+        .get(`${process.env.REACT_APP_API_URL}/auth/verify`, {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
         })
         .then((response) => {
           setIsLoggedIn(true);
@@ -36,11 +54,6 @@ function AuthProviderWrapper(props) {
     }
   };
 
-  const logoutUser = () => {
-    removeToken();
-    authenticateUser();
-  };
-
   useEffect(() => {
     authenticateUser();
   }, []);
@@ -54,6 +67,7 @@ function AuthProviderWrapper(props) {
         storeToken,
         authenticateUser,
         logoutUser,
+        getToken,
       }}
     >
       {props.children}

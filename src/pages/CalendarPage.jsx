@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Calendar from "../components/Calendar";
 import Appbar from "../components/Appbar";
+import Searchform from "../components/Searchform";
 
 const StyledPage = styled.div`
   display: flex;
@@ -13,14 +14,12 @@ const StyledPage = styled.div`
   h1 {
     color: white;
   }
-  .Calendar {
-    border: 2px solid white;
-  }
 `;
 function CalendarPage() {
   return (
     <StyledPage>
       <h1>Your Calendar</h1>
+      <Searchform />
       <Calendar className={Calendar} />
       <Appbar />
     </StyledPage>

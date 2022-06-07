@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import StyledComponents from "styled-components";
-
+import { AuthContext } from "../context/auth.context";
 const Page = styled.div`
   display: flex;
   flex-direction: column;
@@ -63,7 +62,7 @@ function LogInPage() {
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
-
+  const { storeToken, authenticateUser } = useContext(AuthContext);
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -75,9 +74,15 @@ function LogInPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const body = { password, email };
+
     axios
-      .post(`http://localhost5005`)
-      .then(() => navigate("/calendar"))
+      .post(`${process.env.REACT_APP_API_URL}/auth/login`, body)
+      .then((response) => {
+        storeToken(response.data.authToken);
+        console.log(response.data);
+        authenticateUser();
+        navigate("/calendar");
+      })
       .catch((err) => err);
   };
   return (

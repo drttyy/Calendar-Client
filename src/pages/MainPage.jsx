@@ -63,6 +63,7 @@ function MainPage() {
   return (
     <StyledMainPage>
       <h1>ON POINT</h1>
+
       <img src="/calendar.jpg" alt="" />
       <p>Get started so you never forget an appointment again</p>
       <SignUpBtn>
