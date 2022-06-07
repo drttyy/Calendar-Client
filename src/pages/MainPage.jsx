@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledMainPage = styled.div`
   display: flex;
@@ -67,11 +68,11 @@ function MainPage() {
       <img src="/calendar.jpg" alt="" />
       <p>Get started so you never forget an appointment again</p>
       <SignUpBtn>
-        <a href="/signup">SIGN UP</a>
+        <Link to="/signup">SIGN UP</Link>
       </SignUpBtn>
 
       <LogInBtn>
-        <a href="/login">LOG IN</a>
+        <Link to="/login">LOG IN</Link>
       </LogInBtn>
     </StyledMainPage>
   );

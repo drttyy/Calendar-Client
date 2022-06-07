@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Calendar from "../components/Calendar";
 import Appbar from "../components/Appbar";
 import Searchform from "../components/Searchform";
+import { Link } from "react-router-dom";
 
 const StyledPage = styled.div`
   display: flex;
@@ -19,8 +20,12 @@ function CalendarPage() {
   return (
     <StyledPage>
       <h1>Your Calendar</h1>
+      <Link to={"/appointment-create"}>
+        {" "}
+        <img src="./plus.jgp" alt="plus icon" />
+      </Link>
       <Searchform />
-      <Calendar className={Calendar} />
+      <Calendar />
       <Appbar />
     </StyledPage>
   );

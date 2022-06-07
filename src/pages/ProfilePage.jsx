@@ -94,7 +94,7 @@ function ProfilePage() {
             <b>Email: </b>
             {profile.email}
           </p>
-          <p>{profile.phonenumber}</p>
+          <p>Phonenumber: {profile.phonenumber}</p>
         </div>
       )}
       {profile && (

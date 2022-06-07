@@ -7,6 +7,7 @@ import CalendarPage from "./pages/CalendarPage";
 import ProfilePage from "./pages/ProfilePage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import CompanyPage from "./pages/CompanyPage";
+import CreateAppointment from "./pages/CreateAppointmentPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/edit/:profileId" element={<ProfileEditPage />} />
         <Route path="/company" element={<CompanyPage />} />
+        <Route path="/appointment-create" element={<CreateAppointment />} />
       </Routes>
     </div>
   );

@@ -21,7 +21,12 @@ const StyledPage = styled.div`
 `;
 
 function CompanyPage() {
-  return;
+  return (
+    <div>
+      <h1>Hello</h1>
+      <Appbar />
+    </div>
+  );
 }
 
 export default CompanyPage;
