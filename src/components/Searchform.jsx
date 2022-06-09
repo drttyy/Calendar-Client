@@ -1,30 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const SearchForm = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   align-items: center;
   label {
+    font-size: 20px;
     margin-top: 1em;
     margin-bottom: 0.5em;
   }
 
   input {
-    height: 1.5em;
+    height: 2em;
     border-radius: 10px;
-  }
-  .btn {
-    margin-top: 0.5em;
-    border: 1px solid white;
-    background-color: white;
-    width: 4em;
-    border-radius: 100%;
-    text-decoration: none;
-    color: black;
   }
 `;
 

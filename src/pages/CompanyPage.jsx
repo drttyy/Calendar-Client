@@ -7,14 +7,17 @@ import SearchForm from "../components/Searchform";
 
 const StyledPage = styled.div`
   display: flex;
-  background-color: #010d77;
+  background-color: #34401a;
   min-height: 100vh;
   flex-direction: column;
   align-items: center;
   color: white;
-  .createBtn {
+  .button {
     display: flex;
-    height: 2em;
+    height: 1em;
+    font-size: 20px;
+    border-radius: 25px;
+    background-color: #b4bf5e;
     text-decoration: none;
     color: white;
     border: 1px solid white;
@@ -22,22 +25,37 @@ const StyledPage = styled.div`
     align-items: center;
     padding: 1em;
   }
+
+  a {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: white;
+  }
+  p {
+    margin-right: 10px;
+  }
 `;
 
 const StyledList = styled.div`
   display: flex;
   margin-top: 3em;
   border: 2px solid white;
-  width: 80%;
+  background-color: #64732f;
   height: 5em;
-  width: 17em;
+  width: 22em;
+  border-radius: 15px;
   text-decoration: none;
   align-items: center;
   img {
     height: 5em;
+    width: 5em;
+    margin-right: 1em;
   }
-  .title {
-    font-size: 2em;
+  .name {
+    font-size: 20px;
+    text-decoration: none;
+    margin-right: 10px;
   }
 `;
 
@@ -84,7 +102,6 @@ function CompanyPage() {
               <img src={comp.image} alt="" />
               <p className="name">{comp.name}</p>
               <p className="type">{comp.type}</p>
-              <p className="date">{comp.date}</p>
             </StyledList>
           </Link>
         );

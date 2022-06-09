@@ -7,7 +7,7 @@ import MyCompanies from "../components/MyCompanies";
 
 const StyledPage = styled.div`
   display: flex;
-  background-color: #010d77;
+  background-color: #34401a;
   height: 100vh;
   flex-direction: column;
   align-items: center;
@@ -28,9 +28,12 @@ const StyledPage = styled.div`
   }
   .button {
     text-decoration: none;
+    background-color: #64732f;
     color: white;
-    border: 1px solid white;
+    border: 2px solid white;
     width: 7em;
+    border-radius: 20px;
+    font-size: 20px;
     height: 3em;
   }
   .arrowBtn {

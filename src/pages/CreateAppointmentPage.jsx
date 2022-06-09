@@ -8,11 +8,11 @@ const StyledPage = styled.div`
   display: flex;
   height: 100vh;
   margin: 0;
-  background-color: #010d77;
+  background-color: #34401a;
   flex-direction: column;
   align-items: center;
   align-content: center;
-  padding-top: 7em;
+  padding-top: 3em;
   color: white;
 `;
 
@@ -20,11 +20,11 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   color: white;
-  height: 15em;
+  height: 20em;
   width: 15em;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 15px;
   margin-top: 4em;
   font-size: 20px;
@@ -55,8 +55,11 @@ const StyledForm = styled.form`
   button {
     margin-top: 1em;
     height: 2.5em;
+    width: 12em;
+    font-size: 17px;
     border-radius: 15px;
-    background-color: white;
+    background-color: #b4bf5e;
+    color: white;
   }
 `;
 
@@ -101,7 +104,6 @@ function CreateAppointmentPage(props) {
   return (
     <StyledPage>
       <h1>Create an Appointment</h1>
-
       <div>
         <StyledForm onSubmit={handleSubmit}>
           <div>

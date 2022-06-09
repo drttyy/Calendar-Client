@@ -11,7 +11,7 @@ import MyCompanies from "../components/MyCompanies";
 const StyledPage = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #010d77;
+  background-color: #34401a;
   height: 100%;
   align-items: center;
   padding-bottom: 20em;
@@ -32,12 +32,22 @@ const StyledPage = styled.div`
     border-radius: 50px;
     height: 2em;
   }
+
+  .companies-btn {
+    height: 2.5em;
+    margin-bottom: 2em;
+    background-color: #b4bf5e;
+    font-size: 20px;
+    color: white;
+    text-decoration: bold;
+  }
 `;
 
 const AppointmentButton = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 1em;
   h4 {
     margin-right: 10px;
   }
@@ -88,7 +98,9 @@ function CalendarPage() {
     <StyledPage>
       <h1>Your Calendar</h1>
 
-      <button onClick={toggleShowCompanies}>Companies Calendar</button>
+      <button className="companies-btn" onClick={toggleShowCompanies}>
+        Companies Calendar
+      </button>
 
       {showCompanies ? <MyCompanies /> : ""}
 

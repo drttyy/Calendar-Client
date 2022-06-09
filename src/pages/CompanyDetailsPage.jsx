@@ -7,35 +7,68 @@ import AppointmentList from "../components/AppointmentList";
 import Calendar from "../components/Calendar";
 
 const StyledPage = styled.div`
-  background-color: #010d77;
-  padding-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  background-color: #34401a;
   height: 100%;
-  margin: 0;
-  color: white;
   align-items: center;
-  align-content: center;
-  h1 {
-    margin: 0;
-    padding-top: 1.5em;
-  }
+  padding-bottom: 5em;
+  justify-content: center;
+
   .arrowBtn {
     height: 3em;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     margin-right: 18em;
+    margin-top: 1.5em;
+  }
+
+  h1 {
+    color: white;
+  }
+  h4 {
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .companyImg {
+    height: 10em;
+    width: 10em;
+  }
+  .calendar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .plus-icon {
+    border: 2px solid white;
+    border-radius: 50px;
+    height: 2em;
   }
 `;
+
 const AppointmentButton = styled.div`
   display: flex;
-  flex-direction: row;
+  background-color: #34401a;
+  height: 100%;
   align-items: center;
+  justify-content: center;
+
+  img {
+    height: 2em;
+    width: 2em;
+  }
   h4 {
     margin-right: 10px;
   }
-  img {
-    height: 2em;
-  }
+`;
+
+const CompanyDetails = styled.div`
+  color: white;
 `;
 
 function CompanyDetailsPage() {
@@ -84,18 +117,25 @@ function CompanyDetailsPage() {
       </Link>
       {company && appointments && (
         <div>
-          <h1>{company.name}</h1>
-          <img src={company.image} alt="company image" />
-          <p>
-            <b>Opening hour:</b> {company.openingDate} | <b>Closing Hour:</b>
-            {company.closinDate}
-          </p>
-          <p>{company.type}</p>
-
-          <Calendar
-            appointments={appointments}
-            filterAppointments={filterAppointments}
-          />
+          <CompanyDetails>
+            <h1>{company.name}</h1>
+            <img
+              className="companyImg"
+              src={company.image}
+              alt="company image"
+            />
+            <p>
+              <b>Opening hour:</b> {company.openingDate} | <b>Closing Hour:</b>
+              {company.closinDate}
+            </p>
+            <p>{company.type}</p>
+          </CompanyDetails>
+          <div className="calendar">
+            <Calendar
+              appointments={appointments}
+              filterAppointments={filterAppointments}
+            />
+          </div>
           <AppointmentButton>
             <h4>Add an appointment</h4>
             <Link to={`/company/${company._id}/appointment-create`}>

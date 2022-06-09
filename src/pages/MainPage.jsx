@@ -6,7 +6,7 @@ import { AuthContext } from "../context/auth.context";
 const StyledMainPage = styled.div`
   display: flex;
   margin: 0;
-  background-color: #010d77;
+  background-color: #34401a;
   height: 100vh;
   flex-direction: column;
   align-items: center;
@@ -32,10 +32,11 @@ const SignUpBtn = styled.a`
   justify-content: center;
   margin-top: 2em;
   a {
+    background-color: #b4bf5e;
     display: flex;
     height: 3em;
     width: 15em;
-    border: 2px solid white;
+    border: 3px solid white;
     justify-content: center;
     align-items: center;
     text-decoration: none;
@@ -49,12 +50,13 @@ const LogInBtn = styled.a`
   justify-content: center;
   margin-top: 5vh;
   a {
+    background-color: #b4bf5e;
     display: flex;
     justify-content: center;
     text-decoration: none;
     height: 3em;
     width: 15em;
-    border: 2px solid white;
+    border: 3px solid white;
     align-items: center;
     border-radius: 25px 25px 25px 25px;
     color: white;

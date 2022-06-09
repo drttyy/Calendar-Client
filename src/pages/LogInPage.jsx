@@ -8,7 +8,7 @@ const Page = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #010d77;
+  background-color: #34401a;
   height: 100vh;
   h1 {
     font-size: 3em;
@@ -17,8 +17,9 @@ const Page = styled.div`
   form {
     display: flex;
     padding: 2em;
-    width: 20em;
+    width: 18em;
     margin-top: 5em;
+    border-radius: 15px;
     border: 1px solid white;
     flex-flow: column wrap;
     font-size: 1em;
@@ -38,6 +39,8 @@ const Page = styled.div`
     margin-top: 2em;
     height: 3em;
     border-radius: 25px;
+    background-color: #b4bf5e;
+    border: 3px solid white;
   }
   .signBtn {
     font-size: 1.5em;
@@ -117,7 +120,7 @@ function LogInPage() {
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <Link className="signBtn" to="/signup">
-        You already have an account? Go to the login page
+        You don't have an account? Create you account now!
       </Link>
     </Page>
   );

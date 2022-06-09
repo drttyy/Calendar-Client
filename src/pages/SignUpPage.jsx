@@ -8,7 +8,7 @@ const Page = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #010d77;
+  background-color: #34401a;
   height: 100vh;
   margin: 0;
   h1 {
@@ -18,9 +18,10 @@ const Page = styled.div`
   form {
     display: flex;
     padding: 2em;
-    width: 20em;
+    width: 19em;
     margin-top: 1em;
-    border: 1px solid white;
+    border: 2px solid white;
+    border-radius: 15px;
     flex-flow: column wrap;
     font-size: 1em;
     color: white;
@@ -39,6 +40,8 @@ const Page = styled.div`
     margin-top: 2em;
     height: 3em;
     border-radius: 25px;
+    background-color: #b4bf5e;
+    border: 3px solid white;
   }
   .loginBtn {
     font-size: 1.5em;

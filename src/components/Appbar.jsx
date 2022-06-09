@@ -7,7 +7,7 @@ const AppbarStyle = styled.nav`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #010d77;
+  background-color: #252617;
   width: 100%;
   height: 10vh;
   flex-direction: row;
@@ -17,10 +17,11 @@ const AppbarStyle = styled.nav`
   position: fixed;
   padding-right: 1px;
   bottom: 0;
-  border-top: 2px solid white;
+  border-top: 3px solid #b4bf5e;
   a {
     color: white;
     text-decoration: none;
+    font-size: 20px;
   }
 `;
 
@@ -29,7 +30,6 @@ function Appbar() {
     <AppbarStyle>
       <Link to="/calendar">Calendar</Link>
       <Link to="/company">Company</Link>
-      <Link to="/favorites">Favorites</Link>
       <Link to="/profile">Profile</Link>
     </AppbarStyle>
   );

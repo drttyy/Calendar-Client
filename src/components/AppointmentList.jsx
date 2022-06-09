@@ -4,18 +4,20 @@ import styled from "styled-components";
 
 const StyledList = styled.div`
   color: white;
-  border: 1px solid white;
+  border: 2px solid white;
   margin-bottom: 2em;
+  background-color: #64732f;
+  border-radius: 15px;
+  width: 15em;
 `;
 
 function AppointmentList({ appointments }) {
   return (
     <div>
-      <h1>Appointments</h1>
       {appointments.map((appointment) => {
         return (
           <StyledList key={appointment._id}>
-            <p>{appointment.title}</p>
+            <h2>{appointment.title}</h2>
             <p>{appointment.description}</p>
             <p>{new Date(appointment.date).toLocaleDateString()}</p>
             <p>{new Date(appointment.date).toLocaleTimeString()}</p>

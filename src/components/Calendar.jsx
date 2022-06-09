@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const StyledCalendar = styled.div`
   .highlight {
-    background-color: red;
+    background-color: #b4bf5e;
     border-radius: 100%;
   }
 `;
