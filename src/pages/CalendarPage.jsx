@@ -14,7 +14,7 @@ const StyledPage = styled.div`
   background-color: #010d77;
   height: 100%;
   align-items: center;
-  padding-bottom: 200px;
+  padding-bottom: 20em;
 
   h1 {
     color: white;
@@ -46,14 +46,13 @@ const AppointmentButton = styled.div`
 function CalendarPage() {
   const [appointments, setAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
-  const [showCompanies, setShowCompanies] = useState(false)
+  const [showCompanies, setShowCompanies] = useState(false);
 
   const storedToken = localStorage.getItem("authToken");
 
   const toggleShowCompanies = () => {
-    setShowCompanies(!showCompanies)
-  }
-
+    setShowCompanies(!showCompanies);
+  };
 
   const getAppointments = async () => {
     try {
@@ -89,12 +88,10 @@ function CalendarPage() {
     <StyledPage>
       <h1>Your Calendar</h1>
 
-      <Searchform />
-
       <button onClick={toggleShowCompanies}>Companies Calendar</button>
 
-      {showCompanies ? (<MyCompanies />): ("")}
-      
+      {showCompanies ? <MyCompanies /> : ""}
+
       <Calendar
         appointments={appointments}
         filterAppointments={filterAppointments}

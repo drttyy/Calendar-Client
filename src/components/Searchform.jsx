@@ -40,9 +40,6 @@ function Searchform(props) {
     <SearchForm>
       <label htmlFor="search">Find a service</label>
       <input type="text" name="search" value={search} onChange={handleSearch} />
-      <Link className="btn" to="/company">
-        <b> Search</b>
-      </Link>
     </SearchForm>
   );
 }

@@ -72,6 +72,10 @@ function CompanyPage() {
   return (
     <StyledPage>
       <h1>Companies</h1>
+
+      <Link className="button" to="/create-company">
+        Create your company
+      </Link>
       <SearchForm searchFilter={searchFilter} />
       {companies.map((comp) => {
         return (

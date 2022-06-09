@@ -118,11 +118,6 @@ function ProfilePage() {
         </>
       )}
 
-      <Link className="button" to="/create-company">
-        Create your company
-      </Link>
-      <MyCompanies />
-
       <Link className="logout" onClick={logoutUser} to="/">
         Logout
       </Link>
