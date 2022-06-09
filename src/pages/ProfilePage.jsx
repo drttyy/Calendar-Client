@@ -49,11 +49,23 @@ const StyledPage = styled.div`
     padding: 4em;
     border-radius: 10px;
   }
+  .logout {
+    display: flex;
+    border: 1px solid white;
+    color: black;
+    text-decoration: none;
+    width: 5em;
+    height: 2em;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 15px;
+  }
 `;
 
 function ProfilePage() {
   const [profile, setProfile] = useState(null);
-  const { user, authenticateUser } = useContext(AuthContext);
+  const { user, authenticateUser, logoutUser } = useContext(AuthContext);
 
   const getProfile = async () => {
     try {
@@ -64,7 +76,7 @@ function ProfilePage() {
         {
           headers: {
             Authorization: `Bearer ${storedToken}`,
-          }
+          },
         }
       );
       setProfile(response.data);
@@ -74,13 +86,13 @@ function ProfilePage() {
   };
   useEffect(() => {
     authenticateUser();
-    getProfile();
+    getProfile(user);
   }, []);
 
   return (
     <StyledPage>
       <Link to="/calendar">
-        <img className="arrowBtn" src="/arrowleft.png" alt="left arrow" />
+        <img className="arrowBtn" src="/arrow-left.png" alt="left arrow" />
       </Link>
       <h1>Profile</h1>
       {profile && (
@@ -105,11 +117,11 @@ function ProfilePage() {
         </>
       )}
 
-      <Link className="button" to="/themes">
-        Change theme
+      <Link className="button" to="/create-company">
+        Create your company
       </Link>
 
-      <Link className="button" to="/logout">
+      <Link className="logout" onClick={logoutUser} to="/">
         Logout
       </Link>
     </StyledPage>

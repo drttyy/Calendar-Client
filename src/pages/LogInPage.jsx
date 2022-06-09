@@ -54,6 +54,10 @@ const Page = styled.div`
     margin-right: 18em;
     margin-top: 1em;
   }
+  .error-message {
+    color: red;
+    font-size: 1.5em;
+  }
 `;
 
 function LogInPage() {
@@ -78,17 +82,17 @@ function LogInPage() {
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/login`, body)
       .then((response) => {
-        storeToken(response.data.authToken);
         console.log(response.data);
         authenticateUser();
+        storeToken(response.data.authToken);
         navigate("/calendar");
       })
-      .catch((err) => err);
+      .catch((err) => setErrorMessage(err.response.data.errorMessage));
   };
   return (
     <Page>
       <a href="/">
-        <img className="arrowBtn" src="/arrowleft.png" alt="" />
+        <img className="arrowBtn" src="/arrow-left.png" alt="" />
       </a>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>

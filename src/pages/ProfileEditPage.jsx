@@ -88,9 +88,14 @@ function ProfileEditPage() {
   const deleteProfile = async () => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/user/${user._id}/delete`
+        `${process.env.REACT_APP_API_URL}/api/user/${user._id}/delete`,
+        {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
       );
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ProfileEditPage from "./pages/ProfileEditPage";
 import CompanyPage from "./pages/CompanyPage";
 import CreateAppointment from "./pages/CreateAppointmentPage";
+import CreateCompanyPage from "./pages/CreateCompanyPage";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/profile/edit/:profileId" element={<ProfileEditPage />} />
         <Route path="/company" element={<CompanyPage />} />
         <Route path="/appointment-create" element={<CreateAppointment />} />
+        <Route path="/create-company" element={<CreateCompanyPage />} />
+        {/* <Route path="*" element={<ErrorPage />} /> */}
       </Routes>
     </div>
   );

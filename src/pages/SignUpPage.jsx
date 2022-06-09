@@ -100,11 +100,11 @@ function SignUpPage() {
   return (
     <Page>
       <a href="/">
-        <img className="arrowBtn" src="/arrowleft.png" alt="left arrow" />
+        <img className="arrowBtn" src="/arrow-left.png" alt="left arrow" />
       </a>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">FirstName</label>
+        <label htmlFor="firstName">First Name</label>
         <input
           type="text"
           placeholder="Jonh"

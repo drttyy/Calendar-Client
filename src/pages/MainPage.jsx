@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 const StyledMainPage = styled.div`
   display: flex;
@@ -61,6 +62,15 @@ const LogInBtn = styled.a`
 `;
 
 function MainPage() {
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/calendar");
+    }
+  }, [user]);
   return (
     <StyledMainPage>
       <h1>ON POINT</h1>
