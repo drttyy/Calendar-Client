@@ -6,6 +6,7 @@ import Searchform from "../components/Searchform";
 import { Link } from "react-router-dom";
 import AppointmentList from "../components/AppointmentList";
 import axios from "axios";
+import MyCompanies from "../components/MyCompanies";
 
 const StyledPage = styled.div`
   display: flex;
@@ -45,8 +46,14 @@ const AppointmentButton = styled.div`
 function CalendarPage() {
   const [appointments, setAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
+  const [showCompanies, setShowCompanies] = useState(false)
 
   const storedToken = localStorage.getItem("authToken");
+
+  const toggleShowCompanies = () => {
+    setShowCompanies(!showCompanies)
+  }
+
 
   const getAppointments = async () => {
     try {
@@ -60,8 +67,7 @@ function CalendarPage() {
       );
 
       setAppointments(response.data);
-     filterAppointments(new Date().toDateString())
-
+      filterAppointments(new Date().toDateString());
     } catch (err) {
       console.log(err);
     }
@@ -70,14 +76,13 @@ function CalendarPage() {
   const filterAppointments = (date) => {
     let result = [...appointments].filter((appointment) => {
       console.log(new Date(appointment.date).toDateString());
-      return (new Date(appointment.date).toDateString()) === date;
+      return new Date(appointment.date).toDateString() === date;
     });
     setFilteredAppointments(result);
   };
 
   useEffect(() => {
     getAppointments();
-  
   }, []);
 
   return (
@@ -85,6 +90,11 @@ function CalendarPage() {
       <h1>Your Calendar</h1>
 
       <Searchform />
+
+      <button onClick={toggleShowCompanies}>Companies Calendar</button>
+
+      {showCompanies ? (<MyCompanies />): ("")}
+      
       <Calendar
         appointments={appointments}
         filterAppointments={filterAppointments}

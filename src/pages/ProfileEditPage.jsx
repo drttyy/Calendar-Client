@@ -32,11 +32,21 @@ const StyledPage = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     margin-right: 18em;
-    margin-bottom: 6em;
+    margin-bottom: 3em;
+    margin-top: 1em;
   }
 
   .editBtn {
     margin-top: 2em;
+  }
+
+  .deleteBtn {
+    background-color: red;
+    height: 3em;
+    margin-top: 2em;
+    color: white;
+    font-size: 15px;
+    border-radius: 10px;
   }
 `;
 
@@ -44,13 +54,31 @@ const StyledForms = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   color: white;
-
-  border: 1px solid white;
+  height: 30em;
+  width: 22em;
+  border: 2px solid white;
   border-radius: 15px;
   img {
-    height: 5em;
+    height: 7em;
+    border-radius: 100%;
+  }
+
+  input {
+    height: 2em;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .edit {
+    height: 3em;
+    width: 5em;
+    border-radius: 15px;
+    font-size: 15px;
   }
 `;
 
@@ -60,7 +88,7 @@ function ProfileEditPage() {
   const [email, setEmail] = useState("");
   const [phonenumber, setPhonenumber] = useState();
   const [image, setImage] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { user, authenticateUser } = useContext(AuthContext);
 
@@ -109,7 +137,28 @@ function ProfileEditPage() {
   const handleLastName = (e) => setLastName(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePhonenumber = (e) => setPhonenumber(e.target.value);
-  const handleImage = (e) => setImage(e.target.value);
+
+  const handleFileUpload = (e) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+    setIsLoading(true);
+    const uploadData = new FormData();
+
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("image", e.target.files[0]);
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/upload`, uploadData, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+        setImage(response.data.fileUrl);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -137,50 +186,59 @@ function ProfileEditPage() {
     <StyledPage>
       <h1>Edit your profile</h1>
       <Link to="/profile">
-        <img className="arrowBtn" src="/arrowleft.png" alt="" />
+        <img className="arrowBtn" src="/arrow-left.png" alt="left arrow" />
       </Link>
-
       <StyledForms onSubmit={handleSubmit}>
         <img src={image} alt="Profile picture" />
-        <input type="file" name="image" />
+        <div>
+          <iput type="file" name="image" />
+        </div>
+        <div>
+          <label htmlFor="firstName">FirstName </label>
+          <input
+            type="text"
+            placeholder="Jonh"
+            value={firstName}
+            name="firstName"
+            onChange={handleFirstName}
+          />
+        </div>
 
-        <label htmlFor="firstName">FirstName</label>
-        <input
-          type="text"
-          placeholder="Jonh"
-          value={firstName}
-          name="firstName"
-          onChange={handleFirstName}
-        />
+        <div>
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            placeholder="Cena"
+            value={lastName}
+            name="lastName"
+            onChange={handleLastName}
+          />
+        </div>
 
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          placeholder="Cena"
-          value={lastName}
-          name="lastName"
-          onChange={handleLastName}
-        />
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            placeholder="example@email.com"
+            value={email}
+            name="email"
+            onChange={handleEmail}
+          />
+        </div>
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          placeholder="example@email.com"
-          value={email}
-          name="email"
-          onChange={handleEmail}
-        />
-
-        <label htmlFor="phonenumber">Phonenumber</label>
-        <input
-          type="number"
-          placeholder="910000000"
-          value={phonenumber}
-          name="phonenumber"
-          onChange={handlePhonenumber}
-        />
-
-        <button type="submit">Edit</button>
+        <div>
+          <label htmlFor="phonenumber">Phonenumber</label>
+          <input
+            type="number"
+            placeholder="910000000"
+            value={phonenumber}
+            name="phonenumber"
+            onChange={handlePhonenumber}
+          />
+        </div>
+        <button className="edit" type="submit">
+          Edit
+        </button>
       </StyledForms>
 
       <button className="deleteBtn" onClick={deleteProfile}>

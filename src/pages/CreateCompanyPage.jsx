@@ -5,9 +5,11 @@ import styled from "styled-components";
 import Appbar from "../components/Appbar";
 
 const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0;
   background-color: #010d77;
   height: 100vh;
-  margin: 0;
   color: white;
   align-items: center;
   align-content: center;
@@ -21,14 +23,30 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   color: white;
-  height: 15em;
+  height: 22em;
   width: 15em;
   border: 1px solid white;
   border-radius: 15px;
   margin-top: 4em;
   font-size: 20px;
+
+  div {
+    margin-top: 1em;
+
+    button {
+      margin-top: 2em;
+      height: 2.5em;
+      background-color: white;
+      border-radius: 15px;
+      font-size: 15px;
+    }
+    .image {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
 `;
 
 function CreateCompanyPage(props) {
@@ -38,8 +56,8 @@ function CreateCompanyPage(props) {
   const [image, setImage] = useState("");
   const [openingDate, setOpeningDate] = useState("");
   const [closingDate, setClosingDate] = useState("");
-
-  const [errorMessage, setErrorMessage] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
+  const storedToken = localStorage.getItem("authToken");
 
   const { id } = props;
 
@@ -57,10 +75,6 @@ function CreateCompanyPage(props) {
     setType(e.target.value);
   };
 
-  const handleImage = (e) => {
-    setImage(e.target.value);
-  };
-
   const handleOpeningDate = (e) => {
     setOpeningDate(e.target.value);
   };
@@ -69,28 +83,51 @@ function CreateCompanyPage(props) {
     setClosingDate(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const storedToken = localStorage.getItem("authToken");
+  const handleFileUpload = (e) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+    setIsLoading(true);
+    const uploadData = new FormData();
 
-    const body = [name, type, address, openingDate, closingDate, image];
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("image", e.target.files[0]);
 
     axios
-      .post(`${process.env.REACT_APP_API_URL}/company`, body, {
+      .post(`${process.env.REACT_APP_API_URL}/api/upload`, uploadData, {
         headers: {
           Authorization: `Bearer ${storedToken}`,
         },
       })
-      .then(() => navigate("/calendar"))
-      .catch((err) => setErrorMessage(err.response.data.errorMessage));
+      .then((response) => {
+        setImage(response.data.fileUrl);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isLoading) return;
+
+    const body = { name, type, address, openingDate, closingDate, image };
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/create-company`, body, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <Page>
       <h1>Create an Company</h1>
-
-      <Form>
-        <div onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
+        <div>
           <div>
             <label htmlFor="title">Title: </label>
             <input
@@ -149,14 +186,8 @@ function CreateCompanyPage(props) {
           </div>
 
           <div>
-            <label htmlFor="date">Image </label>
-            <input
-              className="date-box"
-              type="file"
-              value={image}
-              name="date"
-              onChange={handleImage}
-            />
+            <label htmlFor="image">Image </label>
+            <input type="file" onChange={(e) => handleFileUpload(e)} />
           </div>
           <button type="submit">Create your company</button>
         </div>

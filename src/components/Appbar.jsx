@@ -28,7 +28,7 @@ function Appbar() {
   return (
     <AppbarStyle>
       <Link to="/calendar">Calendar</Link>
-      <Link to="/Company">Company</Link>
+      <Link to="/company">Company</Link>
       <Link to="/favorites">Favorites</Link>
       <Link to="/profile">Profile</Link>
     </AppbarStyle>

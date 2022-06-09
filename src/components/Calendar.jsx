@@ -3,6 +3,13 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import styled from "styled-components";
 
+const StyledCalendar = styled.div`
+  .highlight {
+    background-color: red;
+    border-radius: 100%;
+  }
+`;
+
 function Myapp({ filterAppointments, appointments }) {
   const [date, setDate] = useState(new Date());
 
@@ -11,14 +18,6 @@ function Myapp({ filterAppointments, appointments }) {
     setDate(e);
     filterAppointments(new Date(e).toDateString());
   };
-
-  const StyledCalendar = styled.div`
-    .highlight {
-      background-color: red;
-      border-radius: 100%;
-    }
-  `;
-
   return (
     <StyledCalendar>
       <Calendar

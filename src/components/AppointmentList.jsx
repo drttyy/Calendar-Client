@@ -14,7 +14,7 @@ function AppointmentList({ appointments }) {
       <h1>Appointments</h1>
       {appointments.map((appointment) => {
         return (
-          <StyledList>
+          <StyledList key={appointment._id}>
             <p>{appointment.title}</p>
             <p>{appointment.description}</p>
             <p>{new Date(appointment.date).toLocaleDateString()}</p>

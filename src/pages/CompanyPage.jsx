@@ -30,6 +30,8 @@ const StyledList = styled.div`
   border: 2px solid white;
   width: 80%;
   height: 5em;
+  width: 17em;
+  text-decoration: none;
   align-items: center;
   img {
     height: 5em;
@@ -41,39 +43,46 @@ const StyledList = styled.div`
 
 function CompanyPage() {
   const [companies, setCompanies] = useState([]);
+  const [allCompanies, setAllCompanies] = useState([]);
+  const storedToken = localStorage.getItem("authToken");
+
+  const searchFilter = (search) => {
+    console.log(search);
+    let filteredCompanies = allCompanies.filter((company) => {
+      return company.name.toLowerCase().includes(search.toLowerCase());
+    });
+    console.log(filteredCompanies);
+    setCompanies(filteredCompanies);
+  };
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/company}`).then((response) => {
-      setCompanies(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/company`, {
+        headers: {
+          Authorization: `Bearer ${storedToken}`,
+        },
+      })
+      .then((response) => {
+        setCompanies(response.data);
+        setAllCompanies(response.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
     <StyledPage>
       <h1>Companies</h1>
-      <SearchForm />
-
-      <StyledList>
-        <img src="/default-profile.jpg" alt="" />
-        <div>
-          <p className="title">
-            <b> title </b>
-          </p>
-          <div>
-            <p className="type">type</p>
-            <p className="date">date</p>
-          </div>
-        </div>
-      </StyledList>
-
+      <SearchForm searchFilter={searchFilter} />
       {companies.map((comp) => {
         return (
-          <div key={comp._id} onClick={"/company/:companyId"}>
-            <img src={comp.image} alt="" />
-            <p className="name">{comp.name}</p>
-            <p className="type">{comp.type}</p>
-            <p className="date">{comp.date}</p>
-          </div>
+          <Link key={comp._id} to={`/company/${comp._id}`}>
+            <StyledList>
+              <img src={comp.image} alt="" />
+              <p className="name">{comp.name}</p>
+              <p className="type">{comp.type}</p>
+              <p className="date">{comp.date}</p>
+            </StyledList>
+          </Link>
         );
       })}
       <Appbar />

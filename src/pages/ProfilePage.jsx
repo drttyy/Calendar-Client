@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import MyCompanies from "../components/MyCompanies";
 
 const StyledPage = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ const StyledPage = styled.div`
     margin-right: 18em;
   }
   .picture {
-    border: 1px solid black;
+    border: 4px solid white;
   }
 
   .profile {
@@ -72,7 +73,7 @@ function ProfilePage() {
       const storedToken = localStorage.getItem("authToken");
 
       let response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/user/${user._id}`,
+        `${process.env.REACT_APP_API_URL}/api/user`,
         {
           headers: {
             Authorization: `Bearer ${storedToken}`,
@@ -91,10 +92,10 @@ function ProfilePage() {
 
   return (
     <StyledPage>
+      <h1>Profile</h1>
       <Link to="/calendar">
         <img className="arrowBtn" src="/arrow-left.png" alt="left arrow" />
       </Link>
-      <h1>Profile</h1>
       {profile && (
         <div className="profile">
           <img className="picture" src={profile.image} alt="profile picture" />
@@ -120,6 +121,7 @@ function ProfilePage() {
       <Link className="button" to="/create-company">
         Create your company
       </Link>
+      <MyCompanies />
 
       <Link className="logout" onClick={logoutUser} to="/">
         Logout

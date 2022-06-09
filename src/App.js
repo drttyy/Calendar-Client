@@ -9,6 +9,8 @@ import ProfileEditPage from "./pages/ProfileEditPage";
 import CompanyPage from "./pages/CompanyPage";
 import CreateAppointment from "./pages/CreateAppointmentPage";
 import CreateCompanyPage from "./pages/CreateCompanyPage";
+import CompanyDetailsPage from "./pages/CompanyDetailsPage";
+import CreateCompanyAppointmentPage from "./pages/CreateCompanyAppointmentPage";
 
 function App() {
   return (
@@ -23,6 +25,12 @@ function App() {
         <Route path="/company" element={<CompanyPage />} />
         <Route path="/appointment-create" element={<CreateAppointment />} />
         <Route path="/create-company" element={<CreateCompanyPage />} />
+        <Route path="/company/:id" element={<CompanyDetailsPage />} />
+        <Route
+          path="/company/:id/appointment-create"
+          element={<CreateCompanyAppointmentPage />}
+        />
+
         {/* <Route path="*" element={<ErrorPage />} /> */}
       </Routes>
     </div>
