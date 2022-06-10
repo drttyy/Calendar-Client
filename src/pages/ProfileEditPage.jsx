@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import styled from "styled-components";
 
 const StyledPage = styled.div`
   display: flex;
-  background-color: #010d77;
+  background-color: #34401a;
   height: 100vh;
   flex-direction: column;
   align-items: center;
@@ -54,12 +54,13 @@ const StyledForms = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   color: white;
   height: 30em;
   width: 22em;
   border: 2px solid white;
   border-radius: 15px;
+  margin: 1em;
   img {
     height: 7em;
     border-radius: 100%;
@@ -72,6 +73,7 @@ const StyledForms = styled.form`
   div {
     display: flex;
     flex-direction: column;
+    margin: 0.5em;
   }
 
   .edit {
@@ -79,6 +81,7 @@ const StyledForms = styled.form`
     width: 5em;
     border-radius: 15px;
     font-size: 15px;
+    background-color: #b4bf5e;
   }
 `;
 
@@ -91,18 +94,21 @@ function ProfileEditPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { user, authenticateUser } = useContext(AuthContext);
+  const { id } = useParams();
 
   const storedToken = localStorage.getItem("authToken");
   const getProfile = async () => {
+    console.log(id);
     try {
       let response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/user/${user._id}`,
+        `${process.env.REACT_APP_API_URL}/api/user/${user}`,
         {
           headers: {
             Authorization: `Bearer ${storedToken}`,
           },
         }
       );
+      console.log(response.data);
       setFirstName(response.data.firstName);
       setLastName(response.data.lastName);
       setEmail(response.data.email);
@@ -116,7 +122,7 @@ function ProfileEditPage() {
   const deleteProfile = async () => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/api/user/${user._id}/delete`,
+        `${process.env.REACT_APP_API_URL}/api/user/${id}/delete`,
         {
           headers: {
             Authorization: `Bearer ${storedToken}`,

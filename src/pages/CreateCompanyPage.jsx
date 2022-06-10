@@ -8,7 +8,7 @@ const Page = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0;
-  background-color: #010d77;
+  background-color: #34401a;
   height: 100vh;
   color: white;
   align-items: center;
@@ -38,9 +38,10 @@ const Form = styled.form`
     button {
       margin-top: 2em;
       height: 2.5em;
-      background-color: white;
+      background-color: #b4bf5e;
       border-radius: 15px;
       font-size: 15px;
+      color: white;
     }
     .image {
       display: flex;
