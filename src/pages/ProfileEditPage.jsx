@@ -11,6 +11,7 @@ const StyledPage = styled.div`
   flex-direction: column;
   align-items: center;
   color: white;
+  padding-bottom: 2em;
 
   label {
     display: flex;
