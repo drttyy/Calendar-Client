@@ -57,7 +57,7 @@ const StyledForms = styled.form`
   align-items: center;
   justify-content: center;
   color: white;
-  height: 30em;
+  height: 33em;
   width: 22em;
   border: 2px solid white;
   border-radius: 15px;
@@ -102,7 +102,7 @@ function ProfileEditPage() {
     console.log(id);
     try {
       let response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/user/${user}`,
+        `${process.env.REACT_APP_API_URL}/api/user`,
         {
           headers: {
             Authorization: `Bearer ${storedToken}`,
@@ -242,6 +242,10 @@ function ProfileEditPage() {
             name="phonenumber"
             onChange={handlePhonenumber}
           />
+        </div>
+        <div>
+          <label htmlFor="image">Image </label>
+          <input type="file" onChange={(e) => handleFileUpload(e)} />
         </div>
         <button className="edit" type="submit">
           Edit

@@ -60,7 +60,6 @@ function CreateCompanyPage(props) {
   const [isLoading, setIsLoading] = useState(false);
   const storedToken = localStorage.getItem("authToken");
 
-  const { id } = props;
 
   const navigate = useNavigate();
 

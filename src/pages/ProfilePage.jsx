@@ -45,6 +45,7 @@ const StyledPage = styled.div`
   }
   .picture {
     border: 4px solid white;
+    width: 8.5em;
   }
 
   .profile {
